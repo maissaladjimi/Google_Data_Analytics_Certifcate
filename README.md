@@ -83,8 +83,67 @@ I used MySQL Workbench to upload the CSV files. I decided to only upload *dailya
                   ELSE 'Weekday'
                 END;
 ```
-
-
+- Add a *BMIType* column that indicates whether the individual is 'Normal Weight', 'Obese', or 'Overweight'.
+```sql
+ALTER TABLE weightloginfo_merged
+ADD COLUMN BMIType VARCHAR(20);
+-- 
+UPDATE weightloginfo_merged
+SET BMIType = CASE  WHEN BMI < 18.5 THEN 'Underweight'
+                    WHEN BMI > 30 THEN 'Obese'  
+                    WHEN BMI BETWEEN 25 and 30 THEN 'Overweight'  
+                    ELSE 'Normal weight' END;
+```
 ## 4. Analyze 
-
+### Users' Activity Insights 
+- Users engage in physical activity for 18.67% of the day (3.79 hours/day), with the remaining 81.33% spent in sedentary pursuits. The 18.67% is distributed as follows: *1.74%* VeryActive, *1.11%* FairlyActive, and *15.82%* LightlyActive.
+  ![3](https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/3001b973-ed9c-409b-9f44-c3ecb557330e)
   
+  ![2](https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/554cc200-6785-4f46-883e-b65a9d515b56)
+  
+- The average daily calorie burn is 2303.60, which is within the recommended range. It goes up slightly on weekends to *2317.0997* compared to *2294.8137* on weekdays.
+  
+  ![4](https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/66ac0bc3-499e-4518-a9ab-666fa22b6481)
+
+  ![5](https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/c96b0579-6b2d-4dcc-95d9-970d851021a8)
+
+- The number of calories burned is influenced by the intensity of the activity performed. The more intense the activity, the more calories are burned.
+  
+  <p align="center">
+  <img src="https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/ee6dc1b5-a6d3-4fe0-aa0a-af756d3716dc" width="800">
+</p>
+
+- While most users maintained a healthy daily step count of over 5000, only 7 out of 33 users (21%) successfully reached the milestone of averaging 10,000 steps per day.
+
+   <p align="center">
+  <img src="https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/dc4d426e-67bd-4732-b4f4-b97aa20b393c"  width="800"
+  </p>
+- Users are most active on Saturdays and Tuesdays, taking the most steps and covering the longest distances. However, their activity decreases on Sundays given it is their rest day.
+
+   <p align="center">
+  <img src="https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/44224a03-3327-4495-a1dc-665f1c25c710"  width="800"
+  </p>
+- Users who take more steps tend to burn more calories, as evidenced by a positive correlation coefficient of 0.5961. This suggests that for every 1% increase in step count, there is a corresponding increase of approximately 0.6% in calories burned.
+    <p align="center">
+  <img src="https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/95a45c43-0ef1-462f-9722-49e329d3dae2"  width="800"
+  </p>
+
+### Users' Sleep Insights 
+- On average, users take about 42 minutes to fall asleep and usually sleep for around 7 hours. However, over 42% of them frequently sleep less than 7 hours a day, suggesting potential issues with sleep deficiency.
+  
+  ![8](https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/fa992c06-3ae3-45a6-a999-671c7ae72a33)
+
+  ![9](https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/ff4da18d-7d57-42d8-8bb0-80f733f647d2)
+
+  ![TillSleep](https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/1a6d5f9a-322f-417e-822d-e8970759c5bb)
+
+
+- Users who spend more time being sedentary are likely to experience greater sleep deficiency as there is a negative correlation of -0.61 between SedentaryMinutes and TotalMinutesAsleep, suggesting that for every 1% increase in sedentary minutes, total sleep time decreases by 0.61%.
+  <p align="center">
+   <img src="https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/e558b798-80a8-496c-a1d7-82184c8dc3c6" width="600"
+   </p>
+### Users' Weight Logging Insights 
+- Unfortunately, although this type of data is important to our analysis, it only holds insights into 8 distinct users with 68 entries. Out of these individuals, 1 is obese, 4 are overweight, and 3 are Normal Weight.
+   <p align="center">
+   <img src="https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/3ca2d260-224f-4af2-a3bf-d7547a0ac15b" width="400"
+   </p>
