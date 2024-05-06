@@ -10,9 +10,9 @@ DESCRIBE weightloginfo_merged ;
 
 -- DROPPING DUPLICATES -- 
 DELETE FROM sleepday_merged 
-WHERE Id IN (SELECT Id FROM ( SELECT Id FROM bellabeat.sleepday_merged 
-										GROUP BY Id, sleepDay, TotalSleepRecords, TotalMinutesAsleep, TotalTimeInBed 
-                                        HAVING COUNT(*) > 1 ) AS duplicates );
+WHERE Id IN (SELECT Id FROM ( SELECT Id FROM sleepday_merged 
+			      GROUP BY Id, sleepDay, TotalSleepRecords, TotalMinutesAsleep, TotalTimeInBed 
+ 			      HAVING COUNT(*) > 1 ) AS duplicates );
 
 -- CHANGING DATATYPES -- 
 UPDATE dailyactivity_merged SET activityDate = STR_TO_DATE(activityDate, '%m/%d/%Y');
@@ -26,7 +26,7 @@ UPDATE weightloginfo_merged SET Date = DATE_FORMAT(STR_TO_DATE(Date, '%m/%d/%Y %
 UPDATE weightloginfo_merged SET Date = STR_TO_DATE(Date, '%m/%d/%Y');
 ALTER TABLE weightloginfo_merged MODIFY COLUMN Date DATE;
 
--- DROPPING UNNECESSARYY COLUMNS -- 
+-- DROPPING UNNECESSARY COLUMNS -- 
 ALTER TABLE weightloginfo_merged DROP COLUMN Fat, DROP COLUMN LogId, DROP COLUMN IsManualReport;
 
 -- DayOfWeek --
@@ -38,17 +38,16 @@ SET DayOfWeek = DAYNAME(activityDate);
 -- DayType --
 ALTER TABLE dailyactivity_merged
 ADD COLUMN DayType VARCHAR(20);
-UPDATE dailyactivity_merged SET DayType = CASE WHEN DAYNAME(activityDate) IN ('Friday', 'Saturday', 'Sunday') THEN 'Weekend'
-											   ELSE 'Weekday' 
-                                               END;
+UPDATE dailyactivity_merged SET DayType = CASE WHEN DAYNAME(activityDate) IN ('Friday', 'Saturday', 'Sunday') THEN 'Weekend' ELSE 'Weekday' END;
 
 -- BMI -- 
 ALTER TABLE weightloginfo_merged
 ADD COLUMN BMIType VARCHAR(20);
 UPDATE weightloginfo_merged SET BMIType = CASE  WHEN BMI < 18.5 THEN 'Underweight'  
-												WHEN BMI > 30 THEN 'Obese'  
+						WHEN BMI > 30 THEN 'Obese'  
                                                 WHEN BMI BETWEEN 25 and 30 THEN 'Overweight'  
-                                                ELSE 'Normal weight' END;
+                                                ELSE 'Normal weight' 
+						END;
 -- ANALYSIS -- 
 
 -- Users' Activity Insights -- 
@@ -95,10 +94,7 @@ FROM sleepday_merged AS sm ;
 
 SELECT 
     COUNT(*) AS SleepLessThan7Hours,
-    (COUNT(*) * 100.0 / (SELECT COUNT(DISTINCT Id) FROM sleepday_merged)) AS Percentage_SleepLessThan7Hours
-FROM (
-    SELECT sm.Id
-    FROM sleepday_merged AS sm
-    GROUP BY sm.Id
-    HAVING AVG(sm.TotalTimeInBed) / 60 < 7
-) AS SleepLessThan7Hours;
+    (COUNT(*) * 100.0 / (SELECT COUNT(DISTINCT Id) FROM sleepday_merged)) AS Percentage_SleepLessThan7Hours FROM ( SELECT sm.Id
+														   FROM sleepday_merged AS sm
+														   GROUP BY sm.Id
+														   HAVING AVG(sm.TotalTimeInBed) / 60 < 7) AS SleepLessThan7Hours;
