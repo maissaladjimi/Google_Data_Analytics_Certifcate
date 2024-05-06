@@ -1,9 +1,10 @@
 # Google Data Analytics Professional Certificate
 # Capstone Project - BellaBeat CaseStudy
 ## Introduction 
-This is a case study conducted within the Google Data Analytics Professional Certificate using **SQL and Tableau** to study how a wellness company can gain insights through analyzing device fitness data to unlock new growth opportunities.
-
-![Bellabeat_logo](https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/70cda19c-6626-45e5-aaee-aba2ae9c1d24)
+This is a case study conducted within the Google Data Analytics Professional Certificate using **SQL and Tableau** to study how a wellness company can gain insights through analyzing device fitness data to unlock new growth opportunities. 
+<p align="left">
+  <img src="https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/70cda19c-6626-45e5-aaee-aba2ae9c1d24" width="300" height="100">
+</p>
 
 In this case study, we will perform data analysis for Bellabeat, a high-tech manufacturer of health-focused products for women. We will analyze smart device data to gain insight into how consumers are using their smart devices. We will follow the steps of the data analysis process: **Ask, Prepare, Process, Analyze, Share, and Act**.
 
@@ -110,7 +111,7 @@ SET BMIType = CASE  WHEN BMI < 18.5 THEN 'Underweight'
 - The number of calories burned is influenced by the intensity of the activity performed. The more intense the activity, the more calories are burned.
   
   <p align="center">
-  <img src="https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/ee6dc1b5-a6d3-4fe0-aa0a-af756d3716dc" width="800">
+  <img src="https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/ee6dc1b5-a6d3-4fe0-aa0a-af756d3716dc" width="800" >
 </p>
 
 - While most users maintained a healthy daily step count of over 5000, only 7 out of 33 users (21%) successfully reached the milestone of averaging 10,000 steps per day.
@@ -145,5 +146,16 @@ SET BMIType = CASE  WHEN BMI < 18.5 THEN 'Underweight'
 ### Users' Weight Logging Insights 
 - Unfortunately, although this type of data is important to our analysis, it only holds insights into 8 distinct users with 68 entries. Out of these individuals, 1 is obese, 4 are overweight, and 3 are Normal Weight.
    <p align="center">
-   <img src="https://github.com/maissaladjimi/Google_Data_Analytics_Certif/assets/94018321/3ca2d260-224f-4af2-a3bf-d7547a0ac15b" width="400"
+   <img src="https://github.com/maissaladjimi/Google_Data_Analytics_Certifcate/assets/94018321/34e0cd4e-0697-4f45-9cc6-2b5d0fdf9da5" 
    </p>
+
+## 5. Share
+View the interactive dashboards on my [Tableau Profile](https://public.tableau.com/app/profile/maissa.lajimi/vizzes) 
+
+### Users' Activity Insights 
+![Tableau1](https://github.com/maissaladjimi/Google_Data_Analytics_Certifcate/assets/94018321/7986e9bc-df8d-4417-9f36-fb88efb7b293)
+
+### Users' Sleep Insights  
+![Tableau2](https://github.com/maissaladjimi/Google_Data_Analytics_Certifcate/assets/94018321/15b7d077-c0c1-43d5-8857-39d925edef83)
+
+## 6. Act 
